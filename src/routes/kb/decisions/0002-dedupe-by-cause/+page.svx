@@ -4,7 +4,7 @@ title: '0002 · Dedupe by verified cause and entry path'
 owner: baiproject
 status: proposed
 reviewed: '2026-10-28'
-signature: 'baiproject'
+signature: 'v1.eyJzdWIiOiIzMDU0IiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTMyMjMyMjEsImV4cCI6MTc5MzMwOTYyMX0.nyfUjWfQoRae7uBYtayNqkSz5kleB5S6GfDJZ4KNac8'
 ---
 
 <script>

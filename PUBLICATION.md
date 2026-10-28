@@ -1,6 +1,6 @@
 # Challenge S01E03: what it shows
 
-Prepared by the public GitHub account `baiproject`, with AI assistance. No private name, email address or local workspace path is needed for attribution.
+Prepared by the public GitHub account `baiproject`, with AI assistance. Owner attribution uses only the public login. The signature field contains the course-issued signed challenge ticket, published with explicit approval as required by MEGA; its payload includes a course participant identifier and validity timestamps. It is not a GitHub access token.
 
 ## Material provenance
 
@@ -14,7 +14,7 @@ The support-kb export is the official MEGA course exercise. The challenge page i
 
 Requires Node 24 or later. Run `npm ci` and `npm run check`. Open rendered/4471-review.html for the standalone snapshot; it contains real rendered counts and the derived signature, but controls are static. Run `npm run dev` for the interactive local version. The HTML, JS and CSS in dist/ are the client build. Nothing here requires a remote deployment.
 
-The two issue files are drafts. No GitHub repository or issues have been created by preparing this package. Publishing would associate this exercise and its contents with baiproject. A future Git commit must use an explicitly approved public/no-reply author identity; do not inherit a private global Git email.
+The two issue files are drafts. The repository and its two issues have now been published with approval. Publishing would associate this exercise and its contents with baiproject. A future Git commit must use an explicitly approved public/no-reply author identity; do not inherit a private global Git email.
 
 Original accepted decision 0001 remains unchanged. New decision 0002 is a proposal, not an assertion of desk approval. All computed numbers are produced from supplied data and logic. No production application reproduction has been performed.
 
