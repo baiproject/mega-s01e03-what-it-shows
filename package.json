@@ -1,0 +1,22 @@
+{
+  "name": "mega-s01e03-what-it-shows",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "analyze": "node scripts/analyze.mjs",
+    "build": "vite build",
+    "verify": "node scripts/verify.mjs",
+    "render": "vite build --ssr src/render.js --outDir build-server && node scripts/render.mjs",
+    "check": "npm run analyze && npm run build && npm run render && npm run verify",
+    "dev": "vite --host 127.0.0.1"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "5.0.3",
+    "mdsvex": "0.12.6",
+    "svelte": "5.57.3",
+    "vite": "6.4.5"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}

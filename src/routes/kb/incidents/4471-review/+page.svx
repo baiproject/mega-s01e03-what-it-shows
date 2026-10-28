@@ -1,0 +1,56 @@
+---
+layout: runbook
+title: '4471 review: separate parser and booking-form hint failures'
+owner: baiproject
+status: proposed
+reviewed: '2026-10-28'
+signature: 'baiproject'
+---
+
+<script>
+ import InvestigationSummary from '#lib/kb/InvestigationSummary.svelte';
+ import CauseTable from '#lib/kb/CauseTable.svelte';
+ import QueueTimeline from '#lib/kb/QueueTimeline.svelte';
+ import DedupeExplorer from '#lib/kb/DedupeExplorer.svelte';
+ import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+## Scope and source of truth
+
+This review describes the 4 October export, not a fresh live queue. The desk may have received more reports since then. Re-export and recompute before using these counts as current operational totals. The original incident's “one issue, one fix” statement disagrees with the classification implemented in the KB.
+
+<InvestigationSummary />
+
+## Two distinct failure mechanisms
+
+**Parser:** the shared parser reads month first for tenants whose locale is day first. It affects app/email reports and form reports that do not follow the booking-v3 month-first hint path. R-41200 at harbour.dental reports 7 April becoming 4 July. Count each report ID once.
+
+**Hint:** booking-v3 displays MM/DD/YYYY while the form interprets input using the day-first tenant locale. A user following that instruction enters the wrong format for the form. This is a separate mechanism, not fixed merely by changing the shared parser. R-41230 (copper.studio, form) is tagged parser at intake but belongs here. The three affected tenants in this export are alder.physio, copper.studio and pale.harbour.
+
+<CauseTable ticket={4471} />
+
+Classification comes from tenant locale, booking-form version and channel via causes.ts and locales.ts. Browser locale, subject and intakeTag are not authoritative. These are findings from the supplied classification logic and reports, not a reproduction against the production product.
+
+## Anomalies that remain unresolved
+
+R-41202, R-41209, R-41236, R-41344 and R-41620 are identified in desk-notes.json as one-day-move observations. Their bodies include day shifts, geographic differences and an invite preceding a booking. The supplied logic files them under parser; keep them in that count and flag them for follow-up. Do not claim a confirmed timezone bug or count an additional cause without reproduction evidence. Collect original input, parsed timestamp, tenant timezone and rendered invite from a controlled reproduction.
+
+## The desk kept merging
+
+<QueueTimeline ticket={4471} />
+
+Reports arrived over months. The largest merge week represents batch triage, not the onset of the fault. Compare receivedAt with mergedAt; do not infer incident frequency from merge activity alone. The supplied timeline uses calendar dates written in timestamps, matching the export component.
+
+## Replace subject-only triage
+
+Matching subjects can conceal different causes, and different subjects can describe one cause. Read the body, resolve the tenant and entry path, and establish the mechanism before merging. Unknown tenant or missing context means investigate; it does not justify a merge.
+
+<DedupeExplorer />
+
+[Proposed decision 0002](/kb/decisions/0002-dedupe-by-cause) supersedes decision 0001 only after desk approval. Decision 0001 remains unchanged as a historical accepted record. The old triage page is marked stale by the shared layout; a recent review date on an incident also does not prove its prose matches rendered data.
+
+## Verification and next actions
+
+Run the analysis script and inspect the allocation CSV and both issue drafts. Confirm the two mechanisms with product regression tests before treating either as fixed. Proposed test cases distinguish app/email from booking-v3 form input, include day-first and month-first locales, reject ambiguous inputs explicitly, and verify the displayed hint agrees with accepted input. No production fix, GitHub publication or course submission has been performed.
+
+<RenderStamp {signature} />

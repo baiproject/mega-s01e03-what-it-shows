@@ -1,0 +1,29 @@
+---
+layout: runbook
+title: '0002 · Dedupe by verified cause and entry path'
+owner: baiproject
+status: proposed
+reviewed: '2026-10-28'
+signature: 'baiproject'
+---
+
+<script>
+ import DedupeExplorer from '#lib/kb/DedupeExplorer.svelte';
+ import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+## Context
+
+[Incident review](/kb/incidents/4471-review) shows distinct mechanisms merged under one ticket. Subject equality is neither necessary nor sufficient for duplicate status. Decision 0001 is preserved unchanged.
+
+## Proposed decision
+
+For date reports, resolve tenant locale, booking-form version and channel; inspect the report and compare the failure mechanism. Use causeOf/sameCause as the supplied date classifier, not as a universal classifier for every product. Matching confirmed causes may merge despite different subjects. Different causes stay separate despite matching subjects. Missing tenants, unknown causes and contradictory symptoms require investigation rather than an automatic merge.
+
+<DedupeExplorer />
+
+## Consequences and adoption
+
+Triage needs more evidence and can initially take longer. Separate issue ownership avoids declaring unrelated failures fixed together. After desk approval, replace the subject-only rule in the triage page with this rule and link this decision. Until approval this record remains proposed; no accepted decision is silently rewritten.
+
+<RenderStamp {signature} />
